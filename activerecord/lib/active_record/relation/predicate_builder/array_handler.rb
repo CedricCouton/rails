@@ -13,6 +13,7 @@ module ActiveRecord
         return attribute.in([]) if value.empty?
 
         values = value.map { |x| x.is_a?(Base) ? x.id : x }
+        values = values.uniq
         nils = values.compact!
         ranges = values.extract! { |v| v.is_a?(Range) }
 
