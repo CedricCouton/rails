@@ -62,7 +62,7 @@ module ActiveRecord
       relation = Relation.new(Post)
       relation.where!(title: ["foo", "bar", "hello"])
 
-      assert_equal({ "title" => ["foo", "bar", "hello"] }, relation.where_values_hash)
+      assert_equal({ "title" => ["bar", "foo", "hello"] }, relation.where_values_hash)
     end
 
     def test_has_values

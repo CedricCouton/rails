@@ -154,6 +154,15 @@ module ActiveRecord
       assert_equal Post.where(author_id: [1, 2]).to_sql, Post.where(author: [1, 2]).to_sql
     end
 
+    def test_belongs_to_array_value_where_sort
+      assert_equal Post.where(author_id: [1, 1]).to_sql, Post.where(author_id: [1]).to_sql
+      assert_equal Post.where(author_id: [1, 1, 2]).to_sql, Post.where(author_id: [1, 2]).to_sql
+    end
+
+    def test_belongs_to_array_value_where_uniq
+      assert_equal Post.where(author_id: [1, 2]).to_sql, Post.where(author_id: [2, 1]).to_sql
+    end
+
     def test_belongs_to_nested_relation_where
       expected = Post.where(author_id: Author.where(id: [1, 2])).to_sql
       actual   = Post.where(author:    Author.where(id: [1, 2])).to_sql
