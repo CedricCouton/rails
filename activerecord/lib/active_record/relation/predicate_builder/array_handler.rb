@@ -15,6 +15,10 @@ module ActiveRecord
         values = value.map { |x| x.is_a?(Base) ? x.id : x }
         nils = values.compact!
         ranges = values.extract! { |v| v.is_a?(Range) }
+        sortables = values.all? {|v| v.is_a?(Integer)} ||  values.all? {|v| v.is_a?(String)}
+        if sortables && values.size > 1
+          values = values.sort.uniq
+        end
 
         values_predicate =
           case values.length
