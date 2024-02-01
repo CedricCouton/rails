@@ -591,7 +591,6 @@ module Arel # :nodoc: all
             end
 
             return collector << "1=0" if values.empty?
-            #values = values.sort
           end
 
           visit(attr, collector) << " IN ("
